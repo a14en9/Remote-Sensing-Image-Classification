@@ -1,0 +1,176 @@
+import tensorflow as tf
+from tensorflow.python.platform import tf_logging as logging
+from tensorflow.contrib.framework.python.ops.variables import get_or_create_global_step
+from net.inception_v2 import _reduced_kernel_size_for_small_input, inception_v2, inception_v2_arg_scope, \
+    inception_v2_base
+from net.vgg import vgg_16, vgg_arg_scope
+import time
+import os
+from read_tfrecord import get_split, load_batch
+from STNet import *
+from TRL import *
+from att_pooling import *
+from vgg_mean_subtraction import normalize
+
+slim = tf.contrib.slim
+
+# State your log directory where you can retrieve your model
+log_dir = '/home/log'
+
+# Create a new evaluation log directory to visualize the validation process
+log_eval = '/home/log_eval'
+
+# State the dataset directory where the validation set is found
+dataset_dir = '/home/test/'
+
+# State the batch_size to evaluate each time, which can be a lot more than the training batch
+batch_size = 12
+
+# State the number of epochs to evaluate
+num_epochs = 1
+
+# Get the latest checkpoint file
+checkpoint_file = tf.train.latest_checkpoint(log_dir)
+# checkpoint_file = '/home/ailab/Workspace/Data/Version_2p2/log/model.ckpt-182791'
+dropout_keep_prob = 1.0
+# Create the file pattern of your TFRecord files so that it could be recognized later on
+file_pattern = '_%s_*.tfrecord'
+
+# State the image size you're resizing your images to. We will use the default inception size of 299.num_samples
+image_size = 448
+
+
+def run():
+    # Create log_dir for evaluation information
+
+    if not os.path.exists(log_eval):
+        os.mkdir(log_eval)
+    predict_file = open(log_eval + '/predictions.txt', 'w+')
+    label_file = open(log_eval + '/labels.txt', 'w+')
+    # Just construct the graph from scratch again
+    with tf.Graph().as_default() as graph:
+        stn_init1 = np.array([0.75, 0.0, 0.0, 0.0, 0.75, +0.0, 0.0, 0.0]).astype('float32')
+        stn_init2 = np.array([0.6, 0.0, +0.0, 0.0, 0.6, +0.0, 0.0, 0.0]).astype('float32')
+        stn_init3 = np.array([0.7, 0.0, +0.0, 0.0, 0.7, +0.0, 0.0, 0.0]).astype('float32')
+
+        tf.logging.set_verbosity(tf.logging.INFO)
+        # Get the dataset first and load one batch of validation images and labels tensors. Set is_training as False so as to use the evaluation preprocessing
+        with tf.variable_scope('Data_input'):
+            dataset = get_split('validation', dataset_dir, file_pattern, file_pattern_for_counting='')
+            images, raw_images, labels = load_batch(dataset, batch_size=batch_size, height=image_size,width=image_size,is_training=False)
+            tf.summary.image('raw_img', raw_images, 1)
+
+        # Create some information about the training steps
+        num_batches_per_epoch = dataset.num_samples / batch_size
+        num_steps_per_epoch = num_batches_per_epoch
+
+        # get feature for localization
+        with tf.variable_scope('STNs'):
+            with slim.arg_scope(STNet_arg_scope(weight_decay=0.00005)):
+
+                stned_images_1 = STNet(images, batch_size, image_size, num_class=len(stn_init1), dropout_keep_prob=dropout_keep_prob, stn_init=stn_init1,
+                                           scope='STN_1',is_training=False, reuse=None)
+                stned_images_1 = normalize(stned_images_1)
+                
+                stned_images_2 = STNet(images, batch_size, image_size/2, num_class=len(stn_init2), dropout_keep_prob=dropout_keep_prob, stn_init=stn_init2,
+                                       scope='STN_2',is_training=False, reuse=False)
+                stned_images_2 = normalize(stned_images_2)
+                stned_images_3 = STNet(images, batch_size, image_size/2, num_class=len(stn_init3), dropout_keep_prob=dropout_keep_prob, stn_init=stn_init3,
+                                       scope='STN_3',is_training=False, reuse=False)
+                stned_images_3 = normalize(stned_images_3)
+                
+                input_images = normalize(images)
+                tf.summary.image('input_img', input_images, 1)
+                tf.summary.image('stn_img_1', stned_images_1, 1)
+                tf.summary.image('stn_img_2', stned_images_2, 1)
+                tf.summary.image('stn_img_3', stned_images_3, 1)
+
+        with slim.arg_scope(vgg_arg_scope()):
+            net_1, _ = vgg_16(input_images, num_classes=dataset.num_classes, is_training=False, spatial_squeeze=False,
+                              scope='vgg_16_1st',fc_conv_padding='SAME', reuse= None, final_endpoint='conv5')
+            net_2, _ = vgg_16(stned_images_1, num_classes=dataset.num_classes, is_training=False, spatial_squeeze=False,
+                              scope='vgg_16_2nd',fc_conv_padding='SAME', reuse=False, final_endpoint='conv5')
+            net_3, _ = vgg_16(stned_images_2, num_classes=dataset.num_classes, is_training=False, spatial_squeeze=False,
+                              scope='vgg_16_3rd',fc_conv_padding='SAME', reuse= False, final_endpoint='conv5')
+        with tf.variable_scope('classification_layer'):
+            logits_1 = full_rank_bilinear_pooling(net_1, dataset.num_classes, dropout_keep_prob, is_training= False, reuse=None, scope='full_rank_bilinear_pooling_1')
+            probabilities_1 = slim.softmax(logits_1, scope='Predictions_1')
+            logits_2 = full_rank_bilinear_pooling(net_2, dataset.num_classes, dropout_keep_prob, is_training= False,reuse=None, scope='full_rank_bilinear_pooling_2')
+            probabilities_2 = slim.softmax(logits_2, scope='Predictions_2')
+            logits_3 = full_rank_bilinear_pooling(net_3, dataset.num_classes, dropout_keep_prob, is_training= False,reuse=False, scope='full_rank_bilinear_pooling_3')
+            probabilities_3 = slim.softmax(logits_3, scope='Predictions_3')
+
+        # #get all the variables to restore from theaccuracy checkpoint file and create the saver function to restore
+        variables_to_restore = slim.get_variables_to_restore()
+        saver = tf.train.Saver(variables_to_restore)
+
+        def restore_fn(sess):
+            return saver.restore(sess, checkpoint_file)
+
+        # Just define the metrics to track without the loss or whatsoever
+        with tf.variable_scope('Accruacy_Compute'):
+            probabilities = (probabilities_1 + probabilities_2)
+            predictions = tf.argmax(probabilities, 1)
+            accuracy, accuracy_update = tf.contrib.metrics.streaming_accuracy(predictions, labels)
+            metrics_op = tf.group(accuracy_update, probabilities)
+
+        # Create the global step and an increment op for monitoring
+        global_step = slim.get_or_create_global_step()
+        global_step_op = tf.assign(global_step,global_step + 1)  # no apply_gradient method so manually increasing the global_step
+
+        # Create a evaluation step function
+        def eval_step(sess, metrics_op, global_step):
+            '''
+            Simply takes in a session, runs the metrics op and some logging information.
+            '''
+            start_time = time.time()
+            _, global_step_count, accuracy_value, predictions_value, labels_value = sess.run(
+                [metrics_op, global_step_op, accuracy, predictions, labels])
+            time_elapsed = time.time() - start_time
+
+            # Log some information
+            logging.info('Global Step %s: Streaming Accuracy: %.4f (%.2f sec/step)', global_step_count, accuracy_value,
+                         time_elapsed)
+            print>> predict_file, 'predictions: \n', predictions_value
+            print>> label_file, 'labels: \n', labels_value
+
+            return accuracy_value
+
+        # Define some scalar quantities to monitor
+        tf.summary.scalar('Validation_Accuracy', accuracy)
+        my_summary_op = tf.summary.merge_all()
+
+        # Get your supervisor
+        sv = tf.train.Supervisor(logdir=log_eval, summary_op=None, saver=None, init_fn=restore_fn)
+
+        # Now we are ready to run in one session
+        with sv.managed_session() as sess:
+            for step in xrange(num_steps_per_epoch * num_epochs):
+                sess.run(sv.global_step)
+                # print vital information every start of the epoch as always
+                if step % num_batches_per_epoch == 0:
+                    logging.info('Epoch: %s/%s', step / num_batches_per_epoch + 1, num_epochs)
+                    logging.info('Current Streaming Accuracy: %.4f', sess.run(accuracy))
+
+                # Compute summaries every 10 steps and continue evaluating
+                if step % 10 == 0:
+                    eval_step(sess, metrics_op=metrics_op, global_step=sv.global_step)
+                    summaries = sess.run(my_summary_op)
+                    sv.summary_computed(sess, summaries)
+
+
+                # Otherwise just run as per normal
+                else:
+                    eval_step(sess, metrics_op=metrics_op, global_step=sv.global_step)
+
+            # At the end of all the evaluation, show the final accuracy
+            logging.info('Final Streaming Accuracy: %.4f', sess.run(accuracy))
+
+            logging.info(
+                'Model evaluation has completed! Visit TensorBoard for more information regarding your evaluation.')
+            # predict_file.close
+            # label_file.close
+
+
+if __name__ == '__main__':
+    run()
