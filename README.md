@@ -23,5 +23,4 @@ If you find our work useful, please kindly cite [our paper](http://bmvc2018.org/
                 Title = {Recurrent Transformer Network for Remote Sensing Scene Categorisation},
                 Booktitle = {in BMVC},
                 Page = {266},
-                Year = {2018}
-            }
+                Year = {2018}}
