@@ -16,4 +16,12 @@ This repo is based on
 Thanks to the original authors for their work!
 
 # Citation
-If you find our work useful, please kindly cite our paper:http://bmvc2018.org/contents/papers/0987.pdf
+If you find our work useful, please kindly cite [our paper](http://bmvc2018.org/contents/papers/0987.pdf):
+
+        @inproceedings{chen2018recurrent,
+                Author = {Chen, Zan and Wang, Shidong and Hou, Xingsong and Shao, Ling},
+                Title = {Recurrent Transformer Network for Remote Sensing Scene Categorisation},
+                Booktitle = {in BMVC},
+                Page = {266},
+                Year = {2018}
+            }
