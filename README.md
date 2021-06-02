@@ -1,6 +1,8 @@
 # RTN
 
-This is a re-implementation of the paper-"Recurrent Transformer Networks for Remote Sensing Scene Categorisation".
+This is a re-implementation of the paper-"Recurrent Transformer Networks for Remote Sensing Scene Categorisation". The framework as follows:
+
+<img src="imgs/rtn.png" width="100%">
 
 ## Dependencies
 
