@@ -4,8 +4,8 @@ This is a re-implementation of the paper-"Recurrent Transformer Networks for Rem
 
 ## Dependencies
 
-- Python >= 3.6
-- Tensorflow >= 1.2.0
+- Python == 3.6
+- Tensorflow == 1.10.0
 
 ## Acknowledgements
 
@@ -16,11 +16,11 @@ This repo is based on
 Thanks for the works of the original authors!
 
 # Citation
-If you find the work useful, please kindly cite the [paper](https://ieeexplore.ieee.org/abstract/document/9052747):
+If you find the work useful, please kindly cite the [paper](http://bmvc2018.org/contents/papers/0987.pdf):
 
     @inproceedings{chen2018recurrent,
                 Author = {Chen, Zan and Wang, Shidong and Hou, Xingsong and Shao, Ling},
-                Title = {Recurrent Transformer Network for Remote Sensing Scene Categorisation},
+                Title = {Recurrent Transformer Networks for Remote Sensing Scene Categorisation},
                 Booktitle = {in BMVC},
                 Page = {266},
                 Year = {2018}
