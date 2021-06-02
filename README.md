@@ -18,12 +18,10 @@ Thanks to the original authors for their work!
 # Citation
 If you find our work useful, please kindly cite [our paper](https://ieeexplore.ieee.org/abstract/document/9052747):
 
-@article{wang2020multi,
-  title={Multi-granularity canonical appearance pooling for remote sensing scene classification},
-  author={Wang, Shidong and Guan, Yu and Shao, Ling},
-  journal={IEEE Transactions on Image Processing},
-  volume={29},
-  pages={5396--5407},
-  year={2020},
-  publisher={IEEE}
-}
+    @inproceedings{chen2018recurrent,
+                    Author = {Chen, Zan and Wang, Shidong and Hou, Xingsong and Shao, Ling},
+                    Title = {Recurrent Transformer Network for Remote Sensing Scene Categorisation},
+                    Booktitle = {in BMVC},
+                    Page = {266},
+                    Year = {2018}}
+  
