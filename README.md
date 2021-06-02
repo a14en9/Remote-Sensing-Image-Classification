@@ -31,7 +31,7 @@ Please download the checkpoint of pretrained VGG 16 from [tensorflow.slim](https
 Example training and testing codes can be found in `exp/AID`. For simplicity, only the case where the data is split into 20% (training) and 80% (test) on the AID dataset is shown. The rest of the experiments are expected to be similar.
 
 ### Results
-The reproduction results (20%-80%) of randomly splitting the dataset twice on AID can reach 93.06% and 92.86%. 
+The reproduction results (20%-80%) of randomly splitting the dataset twice on AID can reach 93.06% and 92.86%, respectively. 
 
 ## Acknowledgements
 
