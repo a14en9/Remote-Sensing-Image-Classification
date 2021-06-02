@@ -10,7 +10,7 @@ flags = tf.app.flags
 flags.DEFINE_string('dataset_dir', '../datasets/AID/data/', 'String: Your dataset directory')
 
 # The number of images in the validation set. You would have to know the total number of examples in advance. This is essentially your evaluation dataset.
-flags.DEFINE_float('validation_size', 0.8, 'Float: The proportion of examples in the dataset to be used for validation')
+flags.DEFINE_float('validation_size', 0.5001, 'Float: The proportion of examples in the dataset to be used for validation')
 
 # The number of shards to split the dataset into
 flags.DEFINE_integer('num_shards', 2, 'Int: Number of shards to split the TFRecord files')
