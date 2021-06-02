@@ -13,10 +13,10 @@ This repo is based on
   - [STN](https://github.com/kevinzakka/spatial-transformer-network)
   - [BCCN](https://github.com/YuqiHUO/bcnn)
 
-Thanks to the original authors for their work!
+Thanks for the works of the original authors!
 
 # Citation
-If you find our work useful, please kindly cite [our paper](https://ieeexplore.ieee.org/abstract/document/9052747):
+If you find the work useful, please kindly cite [the paper](https://ieeexplore.ieee.org/abstract/document/9052747):
 
     @inproceedings{chen2018recurrent,
                     Author = {Chen, Zan and Wang, Shidong and Hou, Xingsong and Shao, Ling},
