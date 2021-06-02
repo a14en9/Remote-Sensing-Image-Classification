@@ -19,9 +19,10 @@ Thanks for the works of the original authors!
 If you find the work useful, please kindly cite the [paper](https://ieeexplore.ieee.org/abstract/document/9052747):
 
     @inproceedings{chen2018recurrent,
-                    Author = {Chen, Zan and Wang, Shidong and Hou, Xingsong and Shao, Ling},
-                    Title = {Recurrent Transformer Network for Remote Sensing Scene Categorisation},
-                    Booktitle = {in BMVC},
-                    Page = {266},
-                    Year = {2018}}
+                Author = {Chen, Zan and Wang, Shidong and Hou, Xingsong and Shao, Ling},
+                Title = {Recurrent Transformer Network for Remote Sensing Scene Categorisation},
+                Booktitle = {in BMVC},
+                Page = {266},
+                Year = {2018}
+              }
   
