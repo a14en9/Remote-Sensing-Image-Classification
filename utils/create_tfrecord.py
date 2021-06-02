@@ -1,16 +1,16 @@
 import random
 import tensorflow as tf
-from scripts.dataset_utils import _dataset_exists, _get_filenames_and_classes, write_label_file, _convert_dataset
+from utils.dataset_utils import _dataset_exists, _get_filenames_and_classes, write_label_file, _convert_dataset
 import sys
 sys.path.append('../../')
 #====================================================DEFINE YOUR ARGUMENTS=======================================================================
 flags = tf.app.flags
 
 #State your dataset directory
-flags.DEFINE_string('dataset_dir', '../datasets/aid_05/data/', 'String: Your dataset directory')
+flags.DEFINE_string('dataset_dir', '../datasets/AID/data/', 'String: Your dataset directory')
 
 # The number of images in the validation set. You would have to know the total number of examples in advance. This is essentially your evaluation dataset.
-flags.DEFINE_float('validation_size', 0.5001, 'Float: The proportion of examples in the dataset to be used for validation')
+flags.DEFINE_float('validation_size', 0.8, 'Float: The proportion of examples in the dataset to be used for validation')
 
 # The number of shards to split the dataset into
 flags.DEFINE_integer('num_shards', 2, 'Int: Number of shards to split the TFRecord files')
