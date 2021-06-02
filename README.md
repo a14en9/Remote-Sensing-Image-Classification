@@ -16,7 +16,7 @@ This repo is based on
 Thanks for the works of the original authors!
 
 # Citation
-If you find the work useful, please kindly cite [the paper](https://ieeexplore.ieee.org/abstract/document/9052747):
+If you find the work useful, please kindly cite the [paper](https://ieeexplore.ieee.org/abstract/document/9052747):
 
     @inproceedings{chen2018recurrent,
                     Author = {Chen, Zan and Wang, Shidong and Hou, Xingsong and Shao, Ling},
