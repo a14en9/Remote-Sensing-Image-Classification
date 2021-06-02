@@ -22,9 +22,9 @@ def random_copy_file(source_dir, train_target_dir, test_target_dir, train_size):
         shutil.move(dirs, test_target_dir)
 
 if __name__ == '__main__':
-    root_path = "/home/ailab/workspace/rssc/"
-    train_path = os.path.join(root_path, "AID_05/train/")
-    test_path = os.path.join(root_path, "AID_05/test/")
+    root_path = ".../workspace/"
+    train_path = os.path.join(root_path, "AID_20percent/train/")
+    test_path = os.path.join(root_path, "AID_80percent/test/")
     if not os.path.exists(train_path):
         os.makedirs(train_path)
     if not os.path.exists(test_path):
