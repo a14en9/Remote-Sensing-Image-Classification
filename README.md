@@ -1,6 +1,6 @@
 # RTN
 
-Tensorflow implementation of "Recurrent Transformer Networks for Remote Sensing Scene Categorisation".
+This is a re-implementation of the paper-"Recurrent Transformer Networks for Remote Sensing Scene Categorisation".
 
 ## Dependencies
 
