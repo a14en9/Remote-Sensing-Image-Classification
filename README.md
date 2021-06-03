@@ -38,7 +38,8 @@ The reproduction results (20%-80%) of randomly splitting the dataset twice on AI
 This repo is based on
   - [STN](https://github.com/kevinzakka/spatial-transformer-network)
   - [BCCN](https://github.com/YuqiHUO/bcnn)
-
+  - [CovPoolFER](https://github.com/d-acharya/CovPoolFER)
+  - 
 Thanks for the works of the original authors!
 
 # Citation
@@ -51,4 +52,13 @@ If you find the work useful, please kindly cite the [paper](http://bmvc2018.org/
                 Page = {266},
                 Year = {2018}
               }
+    @article{wang2020multi,
+            title={Multi-granularity canonical appearance pooling for remote sensing scene classification},
+            author={Wang, Shidong and Guan, Yu and Shao, Ling},
+            journal={IEEE Transactions on Image Processing},
+            volume={29},
+            pages={5396--5407},
+            year={2020},
+            publisher={IEEE}
+          }
   
