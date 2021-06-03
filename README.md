@@ -1,4 +1,4 @@
-# RTN
+# RTN, MG-CAP and IDCCP
 
 This is a re-implementation of the paper-"Recurrent Transformer Networks for Remote Sensing Scene Categorisation". The framework can be found below:
 
