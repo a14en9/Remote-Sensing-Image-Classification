@@ -39,7 +39,7 @@ This repo is based on
   - [STN](https://github.com/kevinzakka/spatial-transformer-network)
   - [BCCN](https://github.com/YuqiHUO/bcnn)
   - [CovPoolFER](https://github.com/d-acharya/CovPoolFER)
-  - 
+  
 Thanks for the works of the original authors!
 
 # Citation
