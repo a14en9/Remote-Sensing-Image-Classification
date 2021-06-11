@@ -7,7 +7,7 @@ from net.vgg import vgg_16, vgg_arg_scope
 import time
 slim = tf.contrib.slim
 from scripts.RTNet import *
-from scripts.att_pooling import *
+from scripts.SoSF import *
 from scripts.read_tfrecord import *
 # ================ DATASET INFORMATION ======================
 # State your log directory where you can retrieve your model
