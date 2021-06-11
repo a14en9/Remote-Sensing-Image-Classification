@@ -1,16 +1,16 @@
 # RTN, MG-CAP and IDCCP
-Source text
+
 The repository shows the re-implementation of three papers, the core of which is to summarise the second-order statistical data of local CNN features to gradually improve the performance of classifying remote sensing scene images. The frameworks including in the repository are shown as below:
 
-"Recurrent Transformer Networks for Remote Sensing Scene Categorisation":
+"Recurrent Transformer Networks for Remote Sensing Scene Categorisation" [PDF](http://www.bmva.org/bmvc/2018/contents/papers/0987.pdf):
 
 <img src="imgs/rtn.png" width="100%">
 
-"Multi-Granularity Canonical Appearance Pooling for Remote Sensing Scene Classification":
+"Multi-Granularity Canonical Appearance Pooling for Remote Sensing Scene Classification" [PDF](https://arxiv.org/pdf/2004.04491.pdf):
 
 <img src="imgs/mg-cap.png" width="100%">
 
-"Invariant Deep Compressible Covariance Pooling for Aerial Scene Categorization"
+"Invariant Deep Compressible Covariance Pooling for Aerial Scene Categorization" [PDF](https://arxiv.org/pdf/2011.05702.pdf):
 
 <img src="imgs/idccp.jpeg" width="100%">
 
@@ -27,7 +27,9 @@ The experimental datasets can be downloaded from:
   
   -[UC Merced Land Use Dataset](http://weegee.vision.ucmerced.edu/datasets/landuse.html), 
   
-  -[NWPU-RESISC45](https://onedrive.live.com/?authkey=%21AHHNaHIlzp%5FIXjs&cid=5C5E061130630A68&id=5C5E061130630A68%21107&parId=5C5E061130630A68%21112&action=locate). 
+  -[NWPU-RESISC45](https://onedrive.live.com/?authkey=%21AHHNaHIlzp%5FIXjs&cid=5C5E061130630A68&id=5C5E061130630A68%21107&parId=5C5E061130630A68%21112&action=locate),
+  
+  -[OPTIMAL-31](https://drive.google.com/file/d/1Fk9a0DW8UyyQsR8dP2Qdakmr69NVBhq9/view).
   
   Please cite their original papers if you are going to use these datasets.
 
