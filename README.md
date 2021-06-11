@@ -1,6 +1,6 @@
 # RTN, MG-CAP and IDCCP
 
-The repository shows the re-implementation of three papers, the core of which is to summarise the second-order statistical data of local CNN features to gradually improve the performance of classifying remote sensing scene images. The frameworks including in the repository are shown as below:
+The repository exhibits the re-implementation of three papers, the core of which is to summarise the second-order statistical data of local CNN features to gradually improve the performance of classifying remote sensing scene images. The frameworks including in the repository are shown as below:
 
 "Recurrent Transformer Networks for Remote Sensing Scene Categorisation" [PDF](http://www.bmva.org/bmvc/2018/contents/papers/0987.pdf):
 
