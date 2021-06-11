@@ -61,4 +61,11 @@ If you find the work useful, please kindly cite the [paper](http://bmvc2018.org/
             year={2020},
             publisher={IEEE}
           }
+     @article{wang2020invariant,
+            title={Invariant Deep Compressible Covariance Pooling for Aerial Scene Categorization},
+            author={Wang, Shidong and Ren, Yi and Parr, Gerard and Guan, Yu and Shao, Ling},
+            journal={IEEE Transactions on Geoscience and Remote Sensing},
+            year={2020},
+            publisher={IEEE}
+          }
   
