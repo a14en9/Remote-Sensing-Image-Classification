@@ -7,7 +7,7 @@ from net.vgg import vgg_16, vgg_arg_scope
 import time
 slim = tf.contrib.slim
 from utils.RTNet import *
-from utils.att_pooling import *
+from utils.SoSF import *
 from utils.pairwise_loss import *
 from utils.read_tfrecord import *
 # ================ DATASET INFORMATION ======================
