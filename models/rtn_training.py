@@ -55,7 +55,6 @@ def run():
     with tf.Graph().as_default() as graph:
         stn_init1 = np.array([1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]).astype('float32')
         stn_init2 = np.array([0.9, 0.0, 0.0, 0.0, 0.9, 0.0, 0.0, 0.0]).astype('float32')
-        # stn_init2 = np.array([0.6, 0.0, +0.25, 0.0, 0.6, +0.25, 0.0, 0.0]).astype('float32')
         stn_init3 = np.array([0.8, 0.0, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0]).astype('float32')
         tf.logging.set_verbosity(tf.logging.INFO)  # Set the verbosity to INFO level
 
