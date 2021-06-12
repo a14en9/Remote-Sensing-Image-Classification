@@ -40,7 +40,7 @@ The downloaded datasets need to be placed in the corresponding directories in `.
 Please download the checkpoint of pretrained VGG 16 from [tensorflow.slim](https://github.com/tensorflow/models/tree/master/research/slim) and place it to the `net` folder. Next, creating three-scale weights by using `net_weights_create.py` in `utils`. 
 
 ### Training and Test
-Example training and testing codes can be found in `models/`. For RTN, only the case where the data is split into 20% (training) and 80% (test) on the AID dataset is shown. The rest of the experiments are expected to be similar.
+Example training and testing codes can be found in `models/`. For RTN, only the case where the data is split into 20% (training) and 80% (test) on the AID dataset is shown. The rest of the experiments are expected to be similar. For MG-CAP, please locate the `linalg_grad.py` file in TensorFlow and replace the `_SelfAdjointEigV2Grad` function with the code in `utils/linalg_grad.txt` to avoid NaNs when the gradient of the degenerated covariance matrix is solved during backpropogation.
 
 ### Results
 The reproduction results (20%-80%) of randomly splitting the dataset twice on AID can reach 93.06% and 92.86%, respectively. 
