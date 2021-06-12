@@ -88,4 +88,31 @@ def _cal_gaussian_pooling(features, batch_size):
     trace_t = 0.0001*tf.matrix_diag(trace_t)
     return tf.add(features_t,trace_t)
 
+# Implementation of Forbenius norm of eigen values
+def _cal_for_norm_cov(mat):
+    e, v = tf.self_adjoint_eig(mat)
+    inner = tf.clip_by_value(e, 1e-6, 1e6)
+    inner = tf.sqrt(inner)
+    # inner = tf.log(inner)
+    inner/=tf.norm(e)
+    # s_f = tf.maximum(0.0,s_f)+1e-6
+    inner = tf.matrix_diag(inner)
+    # s_f = tf.matrix_diag(tf.sqrt(s_f))
+    features_t = tf.matmul(tf.matmul(v, inner), tf.transpose(v, [0, 2, 1]))
+    #features_t = tf.matmul(tf.matmul(tf.nn.top_k(u,k, sorted=True).values, inner), tf.transpose(tf.nn.top_k(u,k, sorted=True).values, [0,2,1]))
+    return features_t
+
+# computes weights for BiMap Layer
+def _variable_with_orth_weight_decay(name1, shape, batch_size, n_times):
+    s1 = tf.cast(shape[2], tf.int32)
+    s2 = tf.cast(shape[2]/n_times, tf.int32)
+    w0_init, _ = tf.qr(tf.random_normal([s1, s2], mean=0.0, stddev=1.0 / tf.sqrt(tf.cast(s1, tf.float32))))
+    w0 = tf.get_variable(name1, initializer=w0_init)
+    tmp1 = tf.reshape(w0, (1, s1, s2))
+    tmp2 = tf.reshape(tf.transpose(w0), (1, s2, s1))
+    tmp1 = tf.tile(tmp1, [shape[0], 1, 1])
+    tmp2 = tf.tile(tmp2, [shape[0], 1, 1])
+    # tmp1 = tf.tile(tmp1, [batch_size, 1, 1])
+    # tmp2 = tf.tile(tmp2, [batch_size, 1, 1])
+    return tmp1,tmp2
 
