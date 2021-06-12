@@ -8,7 +8,7 @@ import time
 slim = tf.contrib.slim
 from utils.RTNet import *
 from utils.SoSF import *
-from utils.pairwise_loss import *
+from utils.pairwise_ranking_loss import *
 from utils.read_tfrecord import *
 # ================ DATASET INFORMATION ======================
 
