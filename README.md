@@ -2,15 +2,15 @@
 
 The repository exhibits the re-implementation of main scripts of three papers, the core of which is to summarise the second-order statistical data of local CNN features to gradually improve the performance of classifying remote sensing scene images. The frameworks including in the repository are shown as below:
 
-"Recurrent Transformer Networks for Remote Sensing Scene Categorisation" [PDF](http://www.bmva.org/bmvc/2018/contents/papers/0987.pdf):
+"Recurrent Transformer Networks for Remote Sensing Scene Categorisation"-[PDF](http://www.bmva.org/bmvc/2018/contents/papers/0987.pdf):
 
 <img src="imgs/rtn.png" width="100%">
 
-"Multi-Granularity Canonical Appearance Pooling for Remote Sensing Scene Classification" [PDF](https://arxiv.org/pdf/2004.04491.pdf):
+"Multi-Granularity Canonical Appearance Pooling for Remote Sensing Scene Classification"-[PDF](https://arxiv.org/pdf/2004.04491.pdf):
 
 <img src="imgs/mg-cap.png" width="100%">
 
-"Invariant Deep Compressible Covariance Pooling for Aerial Scene Categorization" [PDF](https://arxiv.org/pdf/2011.05702.pdf):
+"Invariant Deep Compressible Covariance Pooling for Aerial Scene Categorization"-[PDF](https://arxiv.org/pdf/2011.05702.pdf):
 
 <img src="imgs/idccp.jpeg" width="100%">
 
@@ -55,7 +55,7 @@ This repo is based on
 Thanks for the works of the original authors!
 
 # Citation
-If you find the work useful, please kindly cite the [paper](http://bmvc2018.org/contents/papers/0987.pdf):
+If you find the work useful, please kindly cite the following papers:
 
     @inproceedings{chen2018recurrent,
                 Author = {Chen, Zan and Wang, Shidong and Hou, Xingsong and Shao, Ling},
