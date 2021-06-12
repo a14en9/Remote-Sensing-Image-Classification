@@ -1,6 +1,6 @@
 # RTN, MG-CAP and IDCCP
 
-The repository exhibits the re-implementation of main functions of three papers, the core of which is to summarise the second-order statistical data of local CNN features to gradually improve the performance of classifying remote sensing scene images. The frameworks including in the repository are shown as below:
+The repository exhibits the re-implementation of main scripts of three papers, the core of which is to summarise the second-order statistical data of local CNN features to gradually improve the performance of classifying remote sensing scene images. The frameworks including in the repository are shown as below:
 
 "Recurrent Transformer Networks for Remote Sensing Scene Categorisation" [PDF](http://www.bmva.org/bmvc/2018/contents/papers/0987.pdf):
 
@@ -40,7 +40,7 @@ The downloaded datasets need to be placed in the corresponding directories in `.
 Please download the checkpoint of pretrained VGG 16 from [tensorflow.slim](https://github.com/tensorflow/models/tree/master/research/slim) and place it to the `net` folder. Next, creating three-scale weights by using `net_weights_create.py` in `utils`. 
 
 ### Training and Test
-Example training and testing codes can be found in `exp/AID`. For simplicity, only the case where the data is split into 20% (training) and 80% (test) on the AID dataset is shown. The rest of the experiments are expected to be similar.
+Example training and testing codes can be found in `models/`. For RTN, only the case where the data is split into 20% (training) and 80% (test) on the AID dataset is shown. The rest of the experiments are expected to be similar.
 
 ### Results
 The reproduction results (20%-80%) of randomly splitting the dataset twice on AID can reach 93.06% and 92.86%, respectively. 
