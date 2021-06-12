@@ -6,6 +6,7 @@ slim = tf.contrib.slim
 from utils.read_tfrecord import *
 from net.vgg import vgg_16, vgg_arg_scope
 from utils.SoSF import _variable_with_orth_weight_decay, _cal_for_norm_cov
+from net.resnet_v1 import resnet_v1,resnet_v1_50,resnet_arg_scope
 from utils.MPNCOV import *
 
 # ================ DATASET INFORMATION ======================
