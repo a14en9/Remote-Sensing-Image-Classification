@@ -37,19 +37,16 @@ The experimental datasets can be downloaded from:
 The downloaded datasets need to be placed in the corresponding directories in `../datasets/` and unzipped. Then, using `create_tfrecord.py` under the utils folder to split and process the data. An example of processing AID has been given in the script. Please note that the validation_size is set to 0.5001 since `railwaystation_7.jpg` fails to be encoded from my side.
 
 ### Pretrained Model
-Please download the checkpoint of pretrained VGG 16 from [tensorflow.slim](https://github.com/tensorflow/models/tree/master/research/slim) and place it to the `net` folder. Next, creating three-scale weights by using `net_weights_create.py` in `utils`. 
+Please download the checkpoints of pretrained VGG 16 and ResNet V1 50 from [tensorflow.slim](https://github.com/tensorflow/models/tree/master/research/slim) and place it to the `net` folder. Then, you need to generate three different scale network weights based on VGG16 (named them as `vgg_16_1`, `vgg_16_2` and `vgg_16_3` in example scripts), or call it three times during training.
 
 ### Training and Test
-Example training and testing codes can be found in `models/`. For RTN, only the case where the data is split into 20% (training) and 80% (test) on the AID dataset is shown. The rest of the experiments are expected to be similar. For MG-CAP, please locate the `linalg_grad.py` file in TensorFlow and replace the `_SelfAdjointEigV2Grad` function with the code in `utils/linalg_grad.txt` to avoid NaNs when the gradient of the degenerated covariance matrix is solved during backpropogation.
-
-### Results
-The reproduction results (20%-80%) of randomly splitting the dataset twice on AID can reach 93.06% and 92.86%, respectively. 
+Example training and testing codes can be found in `models/`. For RTN, only the case where the data is split into 20% (training) and 80% (test) on the AID dataset is shown. The rest of the experiments are expected to be similar. Before training MG-CAP model, please locate the `linalg_grad.py` file in TensorFlow and replace the `_SelfAdjointEigV2Grad` function with the code in `utils/linalg_grad.txt` to avoid NaNs when the gradient of the degenerated covariance matrix is solved during backpropogation.
 
 ## Acknowledgements
 
-This repo is based on
+Some related repos include：
   - [STN](https://github.com/kevinzakka/spatial-transformer-network)
-  - [BCCN](https://github.com/YuqiHUO/bcnn)
+  - [Bilinear CNNs](https://github.com/YuqiHUO/bcnn)
   - [CovPoolFER](https://github.com/d-acharya/CovPoolFER)
   
 Thanks for the works of the original authors!
