@@ -1,8 +1,5 @@
 ###########################################################################################################
 Please refer this script to:https://github.com/d-acharya/CovPoolFER
-############## Find the file "linalg_grad.py" in the relative path "tensorflow/python/ops/linalg_grad.py
-############## Replace the original code of function _SelfAdjointEigV2Grad with the following version such that the 
-############## the gradient computation of eigen-decomposition can be more stable without outputing NaNs
 ###########################################################################################################
 @ops.RegisterGradient("SelfAdjointEigV2")
 def _SelfAdjointEigV2Grad(op, grad_e, grad_v):
