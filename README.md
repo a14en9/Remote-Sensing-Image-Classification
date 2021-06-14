@@ -41,6 +41,8 @@ Please download the checkpoints of pretrained VGG 16 and ResNet V1 50 from [tens
 ### Training and Test
 Example training and testing codes can be found in `models/`. For simplicity, each model only shows one dataset partitioning scenario. The rest of the experiments are expected to be similar. Before training MG-CAP model, please locate the `linalg_grad.py` file in TensorFlow and replace the `_SelfAdjointEigV2Grad` function with the code in `utils/linalg_grad.txt` to avoid NaNs when the gradient of the degenerated covariance matrix is solved during backpropogation.
 
+### More details are coming soon!
+
 ## Acknowledgements
 
 Some related repos include：
