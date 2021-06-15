@@ -11,13 +11,13 @@ from utils.MPNCOV import *
 
 # ================ DATASET INFORMATION ======================
 # State your log directory where you can retrieve your model
-log_dir = '../../exp/optimal/log/'
+log_dir = '../../log/'
 
 # Create a new evaluation log directory to visualize the validation process
-log_eval = '../../exp/optimal/log_eval/'
+log_eval = '../../log_eval/'
 
 # State the dataset directory where the validation set is found
-dataset_dir = '../../datasets/optimal/test/'
+dataset_dir = '../../datasets/'
 
 n_times = 8
 # State training or not
@@ -77,6 +77,7 @@ def run():
         # Know the number steps to take before decaying the learning rate and batches per epoch
         num_batches_per_epoch = int(dataset.num_samples / batch_size)
         num_steps_per_epoch = num_batches_per_epoch  # Because one step is one batch processed
+        '''
         # Create cnn feature inference based on vgg architecture
         with slim.arg_scope(vgg_arg_scope()):
             # with vgg_arg_scope(weight_decay=0.0005):
@@ -100,14 +101,14 @@ def run():
             for i in range(8):
                 proj_conv_tmp = slim.conv2d(net[i],512,[1,1],activation_fn=None,reuse=tf.AUTO_REUSE,scope='proj_conv')
                 proj_conv.append(proj_conv_tmp)
-        '''
+        
 
         # Create covariance pooling inference
         with tf.variable_scope('rotate_invariant_cov_pooling'):
             cov_pooling = []
             for i in range(8):
-                # cov_pooling_tmp = Covpool(tf.reshape(proj_conv[i], [batch_size, proj_conv_tmp.shape[1], proj_conv_tmp.shape[2], proj_conv_tmp.shape[3]]))
-                cov_pooling_tmp = Covpool(tf.reshape(net[i], [batch_size, net_tmp.shape[1], net_tmp.shape[2], net_tmp.shape[3]]))
+                cov_pooling_tmp = Covpool(tf.reshape(proj_conv[i], [batch_size, proj_conv_tmp.shape[1], proj_conv_tmp.shape[2], proj_conv_tmp.shape[3]]))
+#                 cov_pooling_tmp = Covpool(tf.reshape(net[i], [batch_size, net_tmp.shape[1], net_tmp.shape[2], net_tmp.shape[3]]))
                 cov_pooling.append(cov_pooling_tmp)
         # Create covariance regression inference
         with tf.variable_scope('cov_pooling_regression'):
