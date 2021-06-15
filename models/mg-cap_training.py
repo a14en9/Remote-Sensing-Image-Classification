@@ -10,15 +10,15 @@ from utils.SoSF import cov_pooling_operation
 # ================ DATASET INFORMATION ======================
 
 # State dataset directory where the tfrecord files are located
-dataset_dir = '../../datasets/NWPU_RESISC45/train/'
+dataset_dir = '../../datasets/'
 
 # State where your log file is at. If it doesn't exist, create it.
-log_dir = '../../exp/NWPU_RESISC45/train_10percent/log/'
+log_dir = '../../log/'
 
 # comment the line below when fine-tuning
-# checkpoint_file = '../../net/vgg_16_3s.ckpt'
+checkpoint_file = '../../net/vgg_16_3s.ckpt'
 # comment the line below during training
-checkpoint_file = tf.train.latest_checkpoint(log_dir)
+# checkpoint_file = tf.train.latest_checkpoint(log_dir)
 
 image_size = 224
 pad_img_size = 317  # 759 #317
