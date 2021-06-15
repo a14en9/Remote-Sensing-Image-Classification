@@ -46,7 +46,7 @@ Example training and testing codes can be found in `models/`. For simplicity, ea
   f = tf.where(tf.is_inf(f), tf.zeros_like(f), f)
 ```
 
-### More details are coming soon!
+### Experimental hyperparameters and more details are coming soon!
 
 ## Acknowledgements
 
