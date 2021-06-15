@@ -18,6 +18,9 @@ The repository exhibits the re-implementation of main scripts of three papers, t
 
 - Python == 3.6
 - Tensorflow == 1.10.0
+```
+python -r requirement.txt
+```
 
 ## Data Preparation
 ### Download Datasets
@@ -46,7 +49,9 @@ Example training and testing codes can be found in `models/`. For simplicity, ea
   f = tf.where(tf.is_inf(f), tf.zeros_like(f), f)
 ```
 
-### Experimental hyperparameters and more details are coming soon!
+### To Do
+
+Experimental hyperparameters and more details are coming soon!
 
 ## Acknowledgements
 
