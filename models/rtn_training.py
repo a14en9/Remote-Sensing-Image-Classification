@@ -13,15 +13,15 @@ from utils.read_tfrecord import *
 # ================ DATASET INFORMATION ======================
 
 # State dataset directory where the tfrecord files are located
-dataset_dir = '../../datasets/AID/train/'
+dataset_dir = '../../datasets/'
 
 # State where your log file is at. If it doesn't exist, create it.
-log_dir = '../../exp/AID/train_20percent/log/'
+log_dir = '../../log/'
 
 # comment the line below when fine-tuning
-# checkpoint_file = '../../net/vgg_16_3s.ckpt'
+checkpoint_file = '../../net/vgg_16_3s.ckpt'
 # comment the line below during training
-checkpoint_file = tf.train.latest_checkpoint(log_dir)
+# checkpoint_file = tf.train.latest_checkpoint(log_dir)
 # State the image size you're resizing your images to. We will use the default inception size of 299.
 image_size = 224
 # Create the file pattern of your TFRecord files so that it could be recognized later on
