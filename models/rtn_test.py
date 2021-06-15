@@ -11,13 +11,13 @@ from scripts.SoSF import *
 from scripts.read_tfrecord import *
 # ================ DATASET INFORMATION ======================
 # State your log directory where you can retrieve your model
-log_dir = '../../exp/AID/80percent/log/'
+log_dir = '../../log/'
 
 # Create a new evaluation log directory to visualize the validation process
-log_eval = '../../exp/AID/80percent/log_eval/'
+log_eval = '../../log_eval/'
 
 # State the dataset directory where the validation set is found
-dataset_dir = '../../datasets/AID_80percent/test/'
+dataset_dir = '../../datasets/'
 
 # State the batch_size to evaluate each time, which can be a lot more than the training batch
 batch_size = 1
