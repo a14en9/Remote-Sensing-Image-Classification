@@ -10,13 +10,13 @@ from utils.SoSF import cov_pooling_operation
 
 # ================ DATASET INFORMATION ======================
 # State your log directory where you can retrieve your model
-log_dir = '../../exp/NWPU_RESISC45/log/'
+log_dir = '../../log/'
 
 # Create a new evaluation log directory to visualize the validation process
-log_eval = '../../exp/NWPU_RESISC45/log_eval'
+log_eval = '../../log_eval/'
 
 # State the dataset directory where the validation set is found
-dataset_dir = '../../datasets/NWPU_RESISC45_90percent/test/'
+dataset_dir = '../../datasets/'
 
 # State training or not
 is_training = False
