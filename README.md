@@ -19,7 +19,7 @@ The repository exhibits the re-implementation of main scripts of three papers, t
 - Python == 3.6
 - Tensorflow == 1.10.0
 ```
-python -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Data Preparation
