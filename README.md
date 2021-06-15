@@ -42,7 +42,7 @@ The downloaded datasets need to be placed in the corresponding directories in `.
 Please download the checkpoints of pretrained VGG 16 and ResNet V1 50 from [tensorflow.slim](https://github.com/tensorflow/models/tree/master/research/slim) and place it to the `net` folder. Then, you need to generate three different scale network weights based on VGG16 (named them as `vgg_16_1`, `vgg_16_2` and `vgg_16_3` in example scripts), or call it three times during training.
 
 ### Training and Test
-Example training and testing codes can be found in `models/`. For simplicity, each model only shows one dataset partitioning scenario. The rest of the experiments are expected to be similar. Before training the MG-CAP model, please find the `_SelfAdjointEigV2Grad` function contained in the `linalg_grad.py` file of TensorFlow, and place the following code in the position before calculating `grad_a` (if loop only) to avoid NaNs when solving the gradient of the degenerate covariance matrix during backpropagation:
+Example training and testing codes can be found in `models/`. For simplicity, each model only shows one dataset partitioning scenario. The rest of the experiments are expected to be similar. Before training the MG-CAP model, please find the `_SelfAdjointEigV2Grad` function contained in the `linalg_grad.py` file of TensorFlow, and place the following code in the position before calculating `grad_a` (Only in the `if` statements) to avoid NaNs when solving the gradient of the degenerate covariance matrix during backpropagation:
 ```
 # Replacing NaNs and inf with 0s
   f = tf.where(tf.is_nan(f), tf.zeros_like(f), f)
