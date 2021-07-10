@@ -51,7 +51,7 @@ Example training and testing codes can be found in `models/`. For simplicity, ea
 
 ### To Do
 
-Experimental hyperparameters and more details are coming soon!
+Experimental hyperparameters such as cropping percentages and more details are coming soon!
 
 ## Acknowledgements
 
