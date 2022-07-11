@@ -1,0 +1,44 @@
+'''
+implementation of covariance pooling layers
+'''
+def _cal_cov_pooling(features):
+    shape_f = features.get_shape().as_list()
+    centers_batch = tf.reduce_mean(tf.transpose(features, [0, 2, 1]),2)
+    centers_batch = tf.reshape(centers_batch, [shape_f[0], 1, shape_f[2]])
+    centers_batch = tf.tile(centers_batch, [1, shape_f[1], 1])
+    tmp = tf.subtract(features, centers_batch)
+    tmp_t = tf.transpose(tmp, [0, 2, 1])
+    features_t = 1/tf.cast((shape_f[1]-1),tf.float32)*tf.matmul(tmp_t, tmp)
+    trace_t = tf.trace(features_t)
+    trace_t = tf.reshape(trace_t, [shape_f[0], 1])
+    trace_t = tf.tile(trace_t, [1, shape_f[2]])
+    trace_t = 0.0001*tf.matrix_diag(trace_t)
+    return tf.add(features_t,trace_t)
+
+# Implementation is of basically LogEig Layer
+def _cal_log_cov(features):
+    [s_f, v_f] = tf.self_adjoint_eig(features)
+    s_f = tf.log(s_f)
+    s_f = tf.matrix_diag(s_f)
+    features_t = tf.matmul(tf.matmul(v_f, s_f), tf.transpose(v_f, [0, 2, 1]))
+    return features_t
+
+# computes weights for BiMap Layer
+def _variable_with_orth_weight_decay(name1, shape):
+    s1 = tf.cast(shape[2], tf.int32)
+    s2 = tf.cast(shape[2]/2, tf.int32)
+    w0_init, _ = tf.qr(tf.random_normal([s1, s2], mean=0.0, stddev=1.0))
+    w0 = tf.get_variable(name1, initializer=w0_init)
+    tmp1 = tf.reshape(w0, (1, s1, s2))
+    tmp2 = tf.reshape(tf.transpose(w0), (1, s2, s1))
+    tmp1 = tf.tile(tmp1, [shape[0], 1, 1])
+    tmp2 = tf.tile(tmp2, [shape[0], 1, 1])
+    return tmp1, tmp2
+
+# ReEig Layer
+def _cal_rect_cov(features):
+    [s_f, v_f] = tf.self_adjoint_eig(features)
+    s_f = tf.clip_by_value(s_f, 0.0001, 10000)
+    s_f = tf.matrix_diag(s_f)
+    features_t = tf.matmul(tf.matmul(v_f, s_f), tf.transpose(v_f, [0, 2, 1]))
+    return features_t
